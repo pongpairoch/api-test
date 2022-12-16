@@ -51,41 +51,13 @@ app2.post('/api/create', (req,res) => {
 
 //get
 app2.get('/api/get', (req, res) => {
-    try {
         get(ref(db, 'users'))
         .then((snapshot) => {
             console.log(snapshot.val())
-            if( snapshot.exists() ) {
-                return res.status(200).json({
-                    RespCode: 200,
-                    RespMessage: 'good',
-                    Result: snapshot.val()
-                })
-            }
-            else {
-                return res.status(200).json({
-                    RespCode: 200,
-                    RespMessage: 'good',
-                    Result: 'not found data'
-                })
-            }
-        })
-        .catch((err2) => {
-            console.log(err2)
-            return res.status(500).json({
-                RespCode: 500,
-                RespMessage: err2.message
-            })
-        })
-    }
-    catch(err) {
-        console.log(err)
-        return res.status(500).json({
-            RespCode: 500,
-            RespMessage: err.message
-        })
-    }
-})
+
+                return res.json(snapshot.val())
+           
+})})
 
 //get by user
 app2.post('/api/getbyuser', (req, res) => {
